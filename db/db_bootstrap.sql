@@ -4,6 +4,10 @@ create user 'root_user'@'%' identified by 'abc123';
 grant all privileges on GammaAir.* to 'root_user'@'%';
 flush privileges;
 
+create user 'web_app'@'%' identified by 'abc1234';
+grant all privileges on GammaAir.* to 'root_user'@'%';
+flush privileges;
+
 use GammaAir;
 
 create table CustomerRep (
