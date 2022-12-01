@@ -12,6 +12,9 @@ def home():
 # SCHEDULES
 
 # Display's the pilot's current schedule
+@pilots.route('/schedule', methods=['GET'])
+def schedule():
+    return '<h1>Pilots: My Schedule</h1>'
 
 # allows the pilot to submit rescheduling requests
 
