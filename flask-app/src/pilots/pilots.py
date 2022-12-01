@@ -20,7 +20,7 @@ def schedule():
 
 
 # allows the pilot to submit a rescheduling request
-@pilots.route('/change-schedule/<flightID>', methods=['POST'])
+@pilots.route('/schedule/change-schedule/<flightID>', methods=['POST'])
 def schedule_change_flight(flightID):
     return '<h1>Pilots: Submit schedule change request for flight #' + flightID + '</h1>'
 
