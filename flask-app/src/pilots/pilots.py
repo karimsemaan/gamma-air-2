@@ -9,14 +9,20 @@ pilots = Blueprint('pilots', __name__)
 def home():
     return '<h1>Pilots: Home</h1>'
 
+
 # SCHEDULES
+
 
 # Display's the pilot's current schedule
 @pilots.route('/schedule', methods=['GET'])
 def schedule():
     return '<h1>Pilots: My Schedule</h1>'
 
-# allows the pilot to submit rescheduling requests
+
+# allows the pilot to submit a rescheduling request
+@pilots.route('/change-schedule/<flightID>', methods=['POST'])
+def book_flight(flightID):
+    return '<h1>Pilots: Submit schedule change request for flight #' + flightID + '</h1>'
 
 
 # REVIEWS

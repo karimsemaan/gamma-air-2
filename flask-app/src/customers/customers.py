@@ -16,7 +16,7 @@ def home():
     return '<h1>Customers: Home</h1>'
 
 
-# TICKETS #
+# TICKETS  #
 
 
 # Displays all tickets that this customer has booked.
@@ -45,7 +45,7 @@ def see_specific_flight(flightID):
 # Displays all tickets that this customer has booked
 @customers.route('/book-flight/<flightID>', methods=['POST'])
 def book_flight(flightID):
-    return '<h1>Customers: Submit booking of flight #' + flightID + '</h1>'
+    return '<h1>Customers: Submit booking of flight #' + fliglhtID + '</h1>'
 
 
 # ASKING QUESTIONS #
