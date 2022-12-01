@@ -37,3 +37,16 @@ def create_app():
     app.register_blueprint(pilots, url_prefix='/pilots')
 
     return app
+
+
+def execute_query(query):
+    cursor = db.get_db().cursor()
+    cursor.execute(query)
+
+    column_headers = [x[0] for x in cursor.description]
+    data = []
+
+    for row in cursor.fetchall():
+        data.append(dict(zip(column_headers, row)))
+
+    return data
