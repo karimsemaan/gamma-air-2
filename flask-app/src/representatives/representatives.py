@@ -54,6 +54,6 @@ def answer_questions():
 # Might not work also since POST
 # Submits an answer to the database and redirects back to the '/answer-questions' route.
 @reps.route('/submit-answer/<questionID>?response=<responseText>', methods=['POST'])
-def assign_pilots(questionID, responseText):
+def submit_answer(questionID, responseText):
     return '<h1>Representatives: Answering question #' + questionID + '</h1>'
 
