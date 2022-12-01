@@ -19,5 +19,5 @@ def log_in_main():
 # takes log in type as part of url (pilots/customers/representatives)
 # determines which table to look at for name + id
 @log_in.route('/log_in/<userType>', methods=['GET'])
-def log_in_specific(user_type):
-    return '<h1>Login ' + user_type + '</h1>'
+def log_in_specific(userType):
+    return '<h1>Login ' + userType + '</h1>'
