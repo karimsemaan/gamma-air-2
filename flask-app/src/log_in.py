@@ -1,17 +1,25 @@
 from flask import Blueprint
+from src import db, execute_query
 
 log_in = Blueprint('log_in', __name__)
 
-
-# this is the home route.
-# has three buttons to redirect to the right login paths
-@log_in.route('/', methods=['GET'])
-def home():
-    return '<h1>Home</h1>'
+# handles mapping userType to the appropriate table name
+tableMap = {
+    "pilots": "Pilots",
+    "customers": "Customers",
+    "representatives": "CustomerRep",
+}
 
 
 # takes log in type as part of url (pilots/customers/representatives)
 # determines which table to look at for name + id
-@log_in.route('/log_in/<userType>', methods=['GET'])
-def log_in_specific(userType):
-    return '<h1>Login ' + userType + '</h1>'
+@log_in.route('/log_in/<userType>?name=<name>&id=<userID>', methods=['GET'])
+def submit_log_in(userType, name, userID):
+    query = 'select * from ' + tableMap.get(userType, "BAD_TABLE_NAME") \
+            + ' where id == ' + userID + ' and lastName == ' + name
+    json_data = execute_query(query)
+
+    if len(json_data) > 0:
+        return True
+
+    return False
