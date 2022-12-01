@@ -34,5 +34,6 @@ def create_app():
     app.register_blueprint(log_in)
     app.register_blueprint(customers, url_prefix='/cust')
     app.register_blueprint(reps, url_prefix='/reps')
+    app.register_blueprint(pilots, url_prefix='/pilots')
 
     return app
