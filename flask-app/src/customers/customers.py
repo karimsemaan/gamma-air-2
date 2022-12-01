@@ -87,6 +87,6 @@ def add_review(flightID):
 # 1) description -> the text of the review being given
 # 2) score -> a number 1..5 (inclusive) scoring the flight overall.
 @customers.route('/submit-question/<flightID>?description=<description>&score=<score>', methods=['GET'])
-def submit_question(flightID, description, score):
+def submit_review(flightID, description, score):
     return '<h1>Customers: Submitting new review</h1>'
 
