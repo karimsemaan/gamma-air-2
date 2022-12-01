@@ -27,7 +27,8 @@ def create_app():
     # Import the various routes
     from src.log_in import log_in
     from src.customers.customers import customers
-    from src.products.representatives  import reps
+    from src.representatives.representatives import reps
+    from src.pilots.pilots import pilots
 
     # Register the routes that we just imported so they can be properly handled
     app.register_blueprint(log_in)

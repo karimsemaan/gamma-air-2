@@ -6,6 +6,7 @@ from src import db
 customers = Blueprint('customers', __name__)
 
 
+
 # the ones I can think of right now:
 # 1) /my-tickets
 # 2) /flights
