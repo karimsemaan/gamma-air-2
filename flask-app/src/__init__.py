@@ -31,7 +31,7 @@ def create_app():
     from src.pilots.pilots import pilots
 
     # Register the routes that we just imported so they can be properly handled
-    app.register_blueprint(log_in)
+    app.register_blueprint(log_in, url_prefix='/')
     app.register_blueprint(customers, url_prefix='/cust')
     app.register_blueprint(reps, url_prefix='/reps')
     app.register_blueprint(pilots, url_prefix='/pilots')
