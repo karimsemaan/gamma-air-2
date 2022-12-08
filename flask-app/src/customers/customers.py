@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 import json
-from src import db
+from src import execute_query
 
 
 customers = Blueprint('customers', __name__)
@@ -42,10 +42,30 @@ def see_specific_flight(flightID):
     return '<h1>Customers: See flight #' + flightID + '</h1>'
 
 
+@customers.route('/get-seat-types')
+def get_seat_types():
+    # [
+    #     {
+    #         "label": "Blue",
+    #         "value": "BLUE"
+    #     },
+    #     {
+    #         "label": "Green",
+    #         "value": "GREEN"
+    #     },
+    #     {
+    #         "label": "Red",
+    #         "value": "RED"
+    #     }
+    # ]
+    data = execute_query("select Name from SeatTypes")
+    return jsonify([{"label": x, "value": x} for x in data])
+
+
 # Displays all tickets that this customer has booked
 @customers.route('/book-flight/<flightID>', methods=['POST'])
 def book_flight(flightID):
-    return '<h1>Customers: Submit booking of flight #' + fliglhtID + '</h1>'
+    return '<h1>Customers: Submit booking of flight #' + flightID + '</h1>'
 
 
 # ASKING QUESTIONS #
