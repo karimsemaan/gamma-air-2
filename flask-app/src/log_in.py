@@ -16,7 +16,7 @@ current_user_id = -1
 
 # takes log in type as part of url (pilots/customers/representatives)
 # determines which table to look at for name + id
-@log_in.route('/log_in/<userType>?name=<name>&id=<userID>', methods=['GET'])
+@log_in.route('/log_in?userType=<userType>&name=<name>&id=<userID>', methods=['GET'])
 def submit_log_in(userType, name, userID):
     query = 'select * from ' + tableMap.get(userType, "BAD_TABLE_NAME") \
             + ' where id == ' + userID + ' and lastName == ' + name
