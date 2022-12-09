@@ -51,3 +51,8 @@ def execute_query(query):
         data.append(dict(zip(column_headers, row)))
 
     return data
+
+
+def get_next_id(table_name):
+    query = '''select max(id) from {}'''.format(table_name)
+    return execute_query(query)
