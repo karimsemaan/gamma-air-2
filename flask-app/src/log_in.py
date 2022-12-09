@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from src import db, execute_query
 
 log_in = Blueprint('log_in', __name__)
@@ -16,15 +16,22 @@ current_user_id = -1
 
 # takes log in type as part of url (pilots/customers/representatives)
 # determines which table to look at for name + id
-@log_in.route('/log_in?userType=<userType>&name=<name>&id=<userID>', methods=['GET'])
-def submit_log_in(userType, name, userID):
-    query = 'select * from ' + tableMap.get(userType, "BAD_TABLE_NAME") \
-            + ' where id == ' + userID + ' and lastName == ' + name
+@log_in.route('/log_in', methods=['GET'])
+def submit_log_in():
+    args = request.args.to_dict()
+    query = 'select * from ' + tableMap.get(args['userType'], "BAD_TABLE_NAME") \
+            + ' where id == ' + args['id'] + ' and lastName == ' + args['name']
+    print(query)
     json_data = execute_query(query)
 
     if len(json_data) > 0:
-        current_user_type = userType
-        current_user_id = userID
+        current_user_type = tableMap.get(args['userType'], "BAD_TABLE_NAME")
+        current_user_id = args['userID']
         return True
 
     return False
+
+
+@log_in.route('/get_user_name', methods=['GET'])
+def get_user_name():
+    return "shai"
