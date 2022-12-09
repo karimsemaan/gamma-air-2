@@ -1,5 +1,4 @@
-from flask import Blueprint
-
+from flask import Blueprint, request
 from src import execute_query
 from src.log_in import current_user_id
 
@@ -48,7 +47,11 @@ def view_questions():
 
 # Might not work also since POST
 # Submits an answer to the database and redirects back to the '/answer-questions' route.
-@reps.route('/submit-answer/<questionID>?response=<responseText>', methods=['POST'])
-def submit_answer(questionID, responseText):
-    return '<h1>Representatives: Answering question #' + questionID + '</h1>'
-
+@reps.route('/submit-answer/<questionID>', methods=['POST'])
+def submit_answer(questionID):
+    response = request.args.to_dict().get("response")
+    query = '''update Questions 
+        set response = {0}, isResolved = true, customerRep = {1}
+        where id = {2}
+        '''.format(response, current_user_id, questionID)
+    execute_query(query)
