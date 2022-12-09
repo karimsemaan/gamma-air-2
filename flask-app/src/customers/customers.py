@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from src import execute_query
 from src.log_in import current_user_id
 
@@ -12,11 +12,20 @@ customers = Blueprint('customers', __name__)
 # Displays all tickets that this customer has booked.
 @customers.route('/my-tickets', methods=['GET'])
 def my_tickets():
-    query = '''select * from 
-        (select * from Customers where id = {}) natural join Tickets
+    query = '''select * from Tickets
+        where customer = {}
         '''
-    data = execute_query(query.format(current_user_id))
-    return '<h1>Customers: My Tickets</h1>'
+    data = execute_query(query.format('7586001'))
+
+    # [
+    #  { "Airline" : airline name,
+    #    "From" : flight from, departure time,
+    #    "To" : flight to, arrival time,
+    #    "SeatType" : flight seatType
+    #  },
+    #  {...}
+    # ]
+    return jsonify(data)
 
 
 # BOOKING FLIGHTS #
