@@ -13,7 +13,7 @@ customers = Blueprint('customers', __name__)
 @customers.route('/my-tickets', methods=['GET'])
 def my_tickets():
     query = '''select * from 
-        (select * from Customers where id == {}) natural join Tickets
+        (select * from Customers where id = {}) natural join Tickets
         '''
     data = execute_query(query.format(current_user_id))
     return '<h1>Customers: My Tickets</h1>'

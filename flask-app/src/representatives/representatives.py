@@ -1,19 +1,9 @@
-from flask import Blueprint, request, jsonify, make_response
-import json
-from src import db, execute_query
+from flask import Blueprint
+
+from src import execute_query
 from src.log_in import current_user_id
 
-
 reps = Blueprint('reps', __name__)
-
-
-# Contains buttons to redirect to all main (top level) pages for representatives
-# the ones I can think of right now:
-# 1) /matching-pilots-flights
-# 2) /answer-questions
-@reps.route('/home', methods=['GET'])
-def home():
-    return '<h1>Representatives: Home</h1>'
 
 
 # MATCHING FLIGHTS AND PILOTS #
@@ -50,7 +40,7 @@ def match_pilot(pilotID, flightID, isCopilot):
 @reps.route('/view-questions', methods=['GET'])
 def view_questions():
     query = ''' select * from
-            (select * from CustomerRep where id == {}) natural join Questions
+            (select * from CustomerRep where id = {}) natural join Questions
             '''
     data = execute_query(query.format(current_user_id))
     return '<h1>Representatives: View asked questions</h1>'

@@ -33,7 +33,7 @@ def schedule_change_flight(flightID):
 @pilots.route('/my-reviews', methods=['GET'])
 def pilot_reviews():
     query = ''' select * from 
-            (select * from CustomerRep where id == {}) natural join Reviews
+            (select * from CustomerRep where id = {}) natural join Reviews
             '''
     data = execute_query(query.format(current_user_id))
     return '<h1>Pilots: My Reviews<h1>'
