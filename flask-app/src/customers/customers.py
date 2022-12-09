@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from src import execute_query, current_user_id
+from src import execute_query
+from src.log_in import current_user_id
 
 
 customers = Blueprint('customers', __name__)
@@ -23,8 +24,8 @@ def my_tickets():
 
 @customers.route('/get-seat-types')
 def get_seat_types():
-    data = execute_query("select Name from SeatTypes")
-    return jsonify([{"label": x, "value": x} for x in data])
+    data = execute_query("select id as value, name as label from SeatTypes")
+    return jsonify(data)
 
 
 # ASKING QUESTIONS #

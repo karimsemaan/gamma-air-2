@@ -29,7 +29,7 @@ def submit_log_in():
         current_user_id = args['userID']
         return 'Success!'
 
-    return 'Fail'
+    return False
 
 
 @log_in.route('/get_user_name', methods=['GET'])
