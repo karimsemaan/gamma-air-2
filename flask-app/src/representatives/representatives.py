@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
 import json
-from src import db
+from src import db, execute_query, current_user_id
 
 
 reps = Blueprint('reps', __name__)
@@ -46,8 +46,12 @@ def match_pilot(pilotID, flightID, isCopilot):
 
 # Displays all questions asked by customers that this representative is assigned to.
 # Doesn't display questions that are already answered.
-@reps.route('/answer-questions', methods=['GET'])
-def answer_questions():
+@reps.route('/view-questions', methods=['GET'])
+def view_questions():
+    query = ''' select * from
+            (select * from CustomerRep where id == {}) natural join Questions
+            '''
+    data = execute_query(query.format(current_user_id))
     return '<h1>Representatives: View asked questions</h1>'
 
 
