@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify, make_response
 import json
-from src import db, execute_query, current_user_id
+from src import db, execute_query
+from src.log_in import current_user_id
 
 
 reps = Blueprint('reps', __name__)
