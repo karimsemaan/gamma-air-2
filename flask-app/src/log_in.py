@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, current_app
 from src import db, execute_query
 
 log_in = Blueprint('log_in', __name__)
@@ -20,16 +20,16 @@ current_user_id = -1
 def submit_log_in():
     args = request.args.to_dict()
     query = 'select * from ' + tableMap.get(args['userType'], "BAD_TABLE_NAME") \
-            + ' where id == ' + args['id'] + ' and lastName == ' + args['name']
-    print(query)
+            + ' where id = ' + args['id'] + ' and lastName = "' + args['name'] + '"'
+    current_app.logger.info(query)
     json_data = execute_query(query)
 
     if len(json_data) > 0:
         current_user_type = tableMap.get(args['userType'], "BAD_TABLE_NAME")
         current_user_id = args['userID']
-        return True
+        return 'Success!'
 
-    return False
+    return 'Fail'
 
 
 @log_in.route('/get_user_name', methods=['GET'])
