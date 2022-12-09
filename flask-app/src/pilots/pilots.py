@@ -1,6 +1,6 @@
 from flask import Blueprint
-import json
-from src import db, execute_query, current_user_id
+from src import execute_query
+from src.log_in import current_user_id
 
 pilots = Blueprint('pilots', __name__)
 
