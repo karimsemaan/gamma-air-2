@@ -48,11 +48,11 @@ def view_questions():
 
 @reps.route('/view-question/<questionID>', methods=['GET'])
 def view_specific_question(questionID):
-    query = '''select question, response, firstName, lastName, f.id as flightid, name
+    query = '''select question, response, firstName, lastName, f.id as flightId, name as airlineName
         from Questions q join Customers c on q.customer = c.id
         join Flights f on f.id = q.flight
         join Airlines a on a.id = q.airline
-        where id = {}'''
+        where q.id = {}'''
 
     data = execute_query(query.format(questionID))
 
