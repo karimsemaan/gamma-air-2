@@ -16,7 +16,18 @@ def home():
 # Display's the pilot's current schedule
 @pilots.route('/schedule', methods=['GET'])
 def schedule():
-    return '<h1>Pilots: My Schedule</h1>'
+    query_time = '''select departureTime, arrivalTime, 
+    from Flights
+    where Flights.coPilot = {0} or Flights.pilot = {0}
+    order by departureTime'''.format(current_user_id)
+    data_time = execute_query(query_time)
+
+    query_airport = '''select name 
+    from Airport natural join (select * from Flights
+    where Flights.coPilot = {0} or Flights.pilot = {0})
+    where Airports.id = Flights.fromAirport or Airports.id = Flights.toAirport'''.format(current_user_id)
+    data_airport = execute_query(query_airport)
+    return data_time, data_airport
 
 
 # allows the pilot to submit a rescheduling request
