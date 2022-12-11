@@ -24,8 +24,9 @@ def submit_log_in():
     json_data = execute_query(query)
 
     if len(json_data) > 0:
+        global current_user_id, current_user_type
         current_user_type = tableMap.get(args['userType'], "BAD_TABLE_NAME")
-        current_user_id = args['id']
+        current_user_id = int(args['id'])
         return 'Success!'
 
     return False
