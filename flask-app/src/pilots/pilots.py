@@ -16,6 +16,13 @@ def home():
 # Display's the pilot's current schedule
 @pilots.route('/schedule', methods=['GET'])
 def schedule():
+    # departure time/airport/gate
+    # arrival time/airport/gate
+    # flight ID
+    # coPilot / pilot (other pilot)
+    # number of people on the plane
+
+
     query_time = '''select departureTime, arrivalTime
     from Flights
     where Flights.coPilot = {0} or Flights.pilot = {0}
