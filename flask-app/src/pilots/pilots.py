@@ -23,7 +23,7 @@ def schedule():
     data_time = execute_query(query_time)
 
     query_airport = '''select name 
-    from Airport natural join (select * from Flights
+    from Airports natural join (select * from Flights
     where Flights.coPilot = {0} or Flights.pilot = {0}) as pilotFlights
     where Airports.id = pilotFlights.fromAirport or Airports.id = pilotFlights.toAirport'''.format(current_user_id)
     data_airport = execute_query(query_airport)
