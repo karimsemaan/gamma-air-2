@@ -1,6 +1,6 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify, current_app
 from src import execute_query
-from src.log_in import current_user_id
+import src.log_in as user_info
 
 reps = Blueprint('reps', __name__)
 
@@ -38,11 +38,17 @@ def match_pilot(pilotID, flightID, isCopilot):
 # Doesn't display questions that are already answered.
 @reps.route('/view-questions', methods=['GET'])
 def view_questions():
-    query = ''' select * from
-            (select * from CustomerRep where id = {}) natural join Questions
-            '''
-    data = execute_query(query.format(current_user_id))
-    return '<h1>Representatives: View asked questions</h1>'
+    query = '''select question, isResolved from 
+        (select id as customer from Customers where supportRep = {0}) c natural join Questions
+        order by isResolved
+        '''
+    data = execute_query(query.format(user_info.current_user_id))
+    return jsonify(data)
+
+
+@reps.route('/view-question/<questionID>', methods=['GET'])
+def view_specific_question(questionID):
+    return ''
 
 
 # Submits an answer to the database and redirects back to the '/answer-questions' route.
@@ -52,5 +58,5 @@ def submit_answer(questionID):
     query = '''update Questions 
         set response = {0}, isResolved = true, customerRep = {1}
         where id = {2}
-        '''.format(response, current_user_id, questionID)
+        '''.format(response, user_info.current_user_id, questionID)
     execute_query(query)

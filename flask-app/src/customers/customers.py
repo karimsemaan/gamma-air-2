@@ -1,10 +1,5 @@
-<<<<<<< Updated upstream
-from flask import Blueprint, request, jsonify, current_app
-from src import execute_query
-=======
 from flask import Blueprint, request, jsonify
 from src import execute_query, get_next_id
->>>>>>> Stashed changes
 from src.log_in import current_user_id
 
 
