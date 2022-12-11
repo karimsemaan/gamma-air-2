@@ -48,7 +48,15 @@ def view_questions():
 
 @reps.route('/view-question/<questionID>', methods=['GET'])
 def view_specific_question(questionID):
-    return ''
+    query = '''select question, response, firstName, lastName, f.id as flightid, name
+        from Questions q join Customers c on q.customer = c.id
+        join Flights f on f.id = q.flight
+        join Airlines a on a.id = q.airline
+        where id = {}'''
+
+    data = execute_query(query.format(questionID))
+
+    return data
 
 
 # Submits an answer to the database and redirects back to the '/answer-questions' route.
