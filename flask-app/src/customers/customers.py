@@ -47,7 +47,7 @@ def get_seat_types():
 # - how do you generate a unique question ID
 # - how do you fill in the cust ID and cust_rep ID fields of the table?
 
-@customers.route('/submit-question/', methods=['POST'])
+@customers.route('/submit-question', methods=['POST'])
 def submit_question():
     id = get_next_id('Questions')
     args = request.args.to_dict()  # questionText, flightID, pilotID, airlineID
