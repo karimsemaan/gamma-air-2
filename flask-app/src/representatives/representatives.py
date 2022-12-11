@@ -38,7 +38,7 @@ def match_pilot(pilotID, flightID, isCopilot):
 # Doesn't display questions that are already answered.
 @reps.route('/view-questions', methods=['GET'])
 def view_questions():
-    query = '''select question, isResolved from 
+    query = '''select id, question, isResolved from 
         (select id as customer from Customers where supportRep = {0}) c natural join Questions
         order by isResolved
         '''
