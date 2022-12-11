@@ -64,7 +64,8 @@ def view_specific_question(questionID):
 def submit_answer(questionID):
     response = request.args.to_dict().get("response")
     query = '''update Questions 
-        set response = {0}, isResolved = true, customerRep = {1}
+        set response = '{0}', isResolved = true, customerRep = {1}
         where id = {2}
         '''.format(response, user_info.current_user_id, questionID)
     execute_query(query)
+    return 'Success'

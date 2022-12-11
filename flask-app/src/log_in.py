@@ -10,8 +10,8 @@ tableMap = {
     "representatives": "CustomerRep",
 }
 
-current_user_type = "Pilots"
-current_user_id = 4
+current_user_type = "CustomerRep"
+current_user_id = '0087498'
 
 
 # takes log in type as part of url (pilots/customers/representatives)
@@ -27,6 +27,7 @@ def submit_log_in():
         global current_user_id, current_user_type
         current_user_type = tableMap.get(args['userType'], "BAD_TABLE_NAME")
         current_user_id = int(args['id'])
+        current_app.logger.info(current_user_id)
         return 'Success!'
 
     return False

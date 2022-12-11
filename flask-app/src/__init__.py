@@ -1,6 +1,6 @@
 # Some set up for the application 
 
-from flask import Flask
+from flask import Flask, current_app
 from flaskext.mysql import MySQL
 
 # create a MySQL object that we will use in other parts of the API
@@ -9,7 +9,7 @@ db = MySQL()
 
 def create_app():
     app = Flask(__name__)
-    
+
     # secret key that will be used for securely signing the session 
     # cookie and can be used for any other security related needs by 
     # extensions or your application
@@ -24,7 +24,7 @@ def create_app():
 
     # Initialize the database object with the settings above. 
     db.init_app(app)
-    
+
     # Import the various routes
     from src.log_in import log_in
     from src.customers.customers import customers
@@ -44,7 +44,7 @@ def execute_query(query):
     cursor = db.get_db().cursor()
     cursor.execute(query)
 
-    column_headers = [x[0] for x in cursor.description]
+    column_headers = [x[0] for x in cursor.description] if not cursor.description is None else []
     data = []
 
     for row in cursor.fetchall():
@@ -54,5 +54,5 @@ def execute_query(query):
 
 
 def get_next_id(table_name):
-    query = '''select max(id) from {}'''.format(table_name)
-    return execute_query(query)
+    query = '''select max(id) as id from {}'''.format(table_name)
+    return int(execute_query(query)[0].get("id")) + 1
