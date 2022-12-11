@@ -1,6 +1,6 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify, current_app
 from src import execute_query
-from src.log_in import current_user_id
+import src.log_in as user_info
 
 pilots = Blueprint('pilots', __name__)
 
@@ -76,9 +76,20 @@ def schedule_change_flight(flightID):
 # this pilot has been responsible for
 @pilots.route('/my-reviews', methods=['GET'])
 def pilot_reviews():
-    query = ''' select * from 
-            (select * from CustomerRep where id = {}) natural join Reviews
+    query = '''
+    select
+        C.firstName   as firstName,
+        C.lastName    as lastName,
+        F.id          as flightId,
+        R.description as description,
+        R.score       as score
+    from Pilots
+             join Flights F on Pilots.id = F.pilot or Pilots.id = F.coPilot
+             join Reviews R on F.id = R.flight
+             join Customers C on R.customer = C.id
+    where Pilots.id = {}
             '''
-    data = execute_query(query.format(current_user_id))
-    return '<h1>Pilots: My Reviews<h1>'
+    current_app.logger.info(user_info.current_user_id)
+    data = execute_query(query.format(user_info.current_user_id))
+    return jsonify(data)
 

@@ -69,7 +69,7 @@ def submit_question():
                VALUES({0}, '{1}', false, {2}, {3}, {4}, {5})
                '''.format(question_id, question, user_info.current_user_id, flight, pilot, airline)
     current_app.logger.info(query)
-    execute_query(query)
+    execute_query(query, True)
     return 'Success'
 
 

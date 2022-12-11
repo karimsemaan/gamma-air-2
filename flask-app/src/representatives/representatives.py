@@ -67,5 +67,5 @@ def submit_answer(questionID):
         set response = '{0}', isResolved = true, customerRep = {1}
         where id = {2}
         '''.format(response, user_info.current_user_id, questionID)
-    execute_query(query)
+    execute_query(query, True)
     return 'Success'

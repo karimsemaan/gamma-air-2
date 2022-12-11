@@ -40,9 +40,12 @@ def create_app():
     return app
 
 
-def execute_query(query):
+def execute_query(query, shouldCommit=False):
     cursor = db.get_db().cursor()
     cursor.execute(query)
+
+    if shouldCommit:
+        db.get_db().commit()
 
     column_headers = [x[0] for x in cursor.description] if not cursor.description is None else []
     data = []

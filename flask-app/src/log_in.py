@@ -10,8 +10,8 @@ tableMap = {
     "representatives": "CustomerRep",
 }
 
-current_user_type = "CustomerRep"
-current_user_id = '0087498'
+current_user_type = "Customers"
+current_user_id = '3696313'
 
 
 # takes log in type as part of url (pilots/customers/representatives)
