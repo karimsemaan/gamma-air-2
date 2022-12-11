@@ -45,7 +45,6 @@ def view_questions():
     return '<h1>Representatives: View asked questions</h1>'
 
 
-# Might not work also since POST
 # Submits an answer to the database and redirects back to the '/answer-questions' route.
 @reps.route('/submit-answer/<questionID>', methods=['POST'])
 def submit_answer(questionID):

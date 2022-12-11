@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 from flask import Blueprint, request, jsonify, current_app
 from src import execute_query
+=======
+from flask import Blueprint, request, jsonify
+from src import execute_query, get_next_id
+>>>>>>> Stashed changes
 from src.log_in import current_user_id
 
 
@@ -42,15 +47,23 @@ def get_seat_types():
 
 # Adds a question to the DB, using the given parameters to fill out the tuple.
 # Once done, redirects back to the home page.
-# Parameters:
-# 1) questionText -> the text of the question being asked
-# 2) flightID/pilotID/airlineID -> -1 if not attached, otherwise an ID of that entity to attach to this question.
-@customers.route(
-    '/submit-question',
-    methods=['GET'])
-def submit_question():
-    args = request.args  # questionText, flightID, pilotID, airlineID
-    return '<h1>Customers: Submitting question</h1>'
+
+# ROUTE NOT COMPLETE:
+# - how do you generate a unique question ID
+# - how do you fill in the cust ID and cust_rep ID fields of the table?
+
+@customers.route('/submit-question/<questionID>', methods=['POST'])
+def submit_question(questionID):
+    id = get_next_id('Questions')
+    args = request.args.to_dict()  # questionText, flightID, pilotID, airlineID
+    question = args.get("question")
+    flight = args.get("flightID")
+    pilot = args.get("pilotID")
+    airline = args.get("airlineID")
+    query = '''INSERT INTO Questions(id, question, isResolved, customer, flight, pilot, airline)
+               VALUES({0}, {1}, false, {2}, {3}, {4}, {5})
+               '''.format(id, question, current_user_id, flight, pilot, airline)
+    execute_query(query)
 
 
 # REVIEWS #
