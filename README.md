@@ -16,39 +16,6 @@ Customers are everyone! Anyone needing a flight comes to us. Customers have a wi
 
 Customer representatives are responsible for managing the customers and pilots, keeping their experience as smooth as possible! They answer questions from customers, handle schedule requests from pilots, and assign pilots to flights given to them by our airline partners. Each customer representative has a manager (another customer representative) who they can go to for help if need be.
 
-# Technical Database Details:
+# [4] Youtube Video:
 
-When setting up the database, the order of consoles to run is as follows:
-
-1. Create Database.sql
-
-2. Add Tables.sql
-
-3. Add Customer Rep Table Data.sql
-
-4. Add Customer Table Data.sql
-
-5. Add Pilot Table Data.sql
-
-6. Add Airline Table Data.sql
-
-7. Add Airport Table Data.sql
-
-8. Add Plane Type Table Data.sql
-
-9. Add Plane Table Data.sql
-
-10. Add Seat Type Table Data.sql
-
-11. Add Plane Seat Table Data.sql
-
-12. Add Flight Table Data.sql
-
-13. Add Schedule Request Table Data.sql
-
-14. Add Review Table Data.sql
-
-15. Add Ticket Table Data.sql
-
-16. Add Question Table Data.sql
-
+https://youtu.be/qMTTwSBksUM
