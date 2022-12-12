@@ -5,32 +5,6 @@ import src.log_in as user_info
 reps = Blueprint('reps', __name__)
 
 
-# MATCHING FLIGHTS AND PILOTS #
-
-
-# Displays a view allowing the user to select a pilot and a flight
-# assigning that pilot to that flight.
-# This means getting all flights that are unassigned, and then all pilots.
-# A pilot can be assigned to either pilot or copilot a flight.
-# When this is done, it hits the endpoint in this file at '/matching' with the appropriate query parameters
-@reps.route('/matching-pilots-flights', methods=['GET'])
-def assign_pilots():
-    return '<h1>Representatives: Assign Pilots to Flights</h1>'
-
-
-# This endpoint might break right now, since it is a POST but has code inside it as if it were a GET (returning)
-#
-# This endpoint is responsible for assigning a pilot to a flight. It has three parameters:
-# 1) the pilot ID (the pilot to assign to the given flight)
-# 2) the flight ID (the flight to assign the given pilot to)
-# 3) isCopilot, a boolean that - if true - means the given pilotID should be assigned as a copilot for this flight
-#   if false, it assigns the given pilot as pilot.
-@reps.route('/matching?pilot=<pilotID>&flight=<flightID>&isCopilot=<isCopilot>', methods=['POST'])
-def match_pilot(pilotID, flightID, isCopilot):
-    type = 'Copilot' if isCopilot else 'Pilot'
-    return '<h1>Representatives: Assigning ' + type + ' ID #' + pilotID + 'to Flight ID #' + flightID + '</h1>'
-
-
 # ANSWERING QUESTIONS #
 
 
@@ -48,13 +22,13 @@ def view_questions():
 
 @reps.route('/view-question/<questionID>', methods=['GET'])
 def view_specific_question(questionID):
-    query = '''select question, response, firstName, lastName, f.id as flightId, name as airlineName
-        from Questions q join Customers c on q.customer = c.id
-        join Flights f on f.id = q.flight
-        join Airlines a on a.id = q.airline
-        where q.id = {}'''
-
-    data = execute_query(query.format(questionID))
+    query = '''
+        select question, response, firstName, lastName
+        from (select * from Questions where id = {}) q
+                 join Customers c on q.customer = c.id
+    '''.format(questionID)
+    data = execute_query(query)
+    current_app.logger.info(query)
 
     return data
 

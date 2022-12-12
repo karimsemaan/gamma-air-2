@@ -171,15 +171,15 @@ use GammaAir;
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (3428687, 51670.55, 'Urbanus', 'Gravells', 3428687);
 
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (5240615, 46189.40, 'Izabel', 'Nanelli', 3428687);
-insert into CustomerRep (id, salary, firstName, lastName, managerId) values (0968870, 37247.70, 'Shurwood', 'Machel', 3428687);
+insert into CustomerRep (id, salary, firstName, lastName, managerId) values (968870, 37247.70, 'Shurwood', 'Machel', 3428687);
 
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (1550028, 53927.96, 'Dorie', 'Gilliland', 5240615);
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (9113258, 37610.56, 'Colleen', 'Edney', 5240615);
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (2211276, 32957.30, 'Kellen', 'Pickervance', 5240615);
 insert into CustomerRep (id, salary, firstName, lastName, managerId) values (7190305, 33653.38, 'Robbie', 'Ghidoli', 5240615);
-insert into CustomerRep (id, salary, firstName, lastName, managerId) values (1330501, 54435.70, 'Sim', 'Hammill', 0968870);
-insert into CustomerRep (id, salary, firstName, lastName, managerId) values (0087498, 30069.20, 'Barnaby', 'Agerskow', 0968870);
-insert into CustomerRep (id, salary, firstName, lastName, managerId) values (2346794, 53881.28, 'Kilian', 'Abrahmovici', 0968870);
+insert into CustomerRep (id, salary, firstName, lastName, managerId) values (1330501, 54435.70, 'Sim', 'Hammill', 968870);
+insert into CustomerRep (id, salary, firstName, lastName, managerId) values (87498, 30069.20, 'Barnaby', 'Agerskow', 968870);
+insert into CustomerRep (id, salary, firstName, lastName, managerId) values (2346794, 53881.28, 'Kilian', 'Abrahmovici', 968870);
 
 -- Generating data for Customers:
 use GammaAir;
@@ -187,7 +187,7 @@ use GammaAir;
 insert into Customers (id, firstName, lastName, email, supportRep)
 values (7586001, 'Caryl', 'Neely', 'cneely0@cafepress.com', 1330501);
 insert into Customers (id, firstName, lastName, email, supportRep)
-values (6567114, 'Winthrop', 'Ronca', 'wronca1@bbc.co.uk', 0087498);
+values (6567114, 'Winthrop', 'Ronca', 'wronca1@bbc.co.uk', 87498);
 insert into Customers (id, firstName, lastName, email, supportRep)
 values (5928192, 'Garfield', 'Driffill', 'gdriffill2@msn.com', 2346794);
 insert into Customers (id, firstName, lastName, email, supportRep)
@@ -195,9 +195,9 @@ values (2943577, 'Georgie', 'Ranfield', 'granfield3@symantec.com', 2346794);
 insert into Customers (id, firstName, lastName, email, supportRep)
 values (5104420, 'Kincaid', 'Janjic', 'kjanjic4@baidu.com', 2346794);
 insert into Customers (id, firstName, lastName, email, supportRep)
-values (3935181, 'Gretel', 'Offa', 'goffa5@usnews.com', 0087498);
+values (3935181, 'Gretel', 'Offa', 'goffa5@usnews.com', 87498);
 insert into Customers (id, firstName, lastName, email, supportRep)
-values (6227087, 'Cecily', 'Dowbakin', 'cdowbakin6@ox.ac.uk', 0087498);
+values (6227087, 'Cecily', 'Dowbakin', 'cdowbakin6@ox.ac.uk', 87498);
 insert into Customers (id, firstName, lastName, email, supportRep)
 values (3696313, 'Dore', 'Neggrini', 'dneggrini7@1688.com', 1330501);
 insert into Customers (id, firstName, lastName, email, supportRep)
@@ -433,7 +433,7 @@ values (1945218, 'What is the maximum baggage weight I can check in with my airl
         '100 pounds', true, 7586001, 1330501, 0, 0, 1465692);
 
 insert into Questions (id, question, response, isResolved, customer, customerRep, flight, pilot, airline)
-values (1234567, 'What is my Airline?', 'Jet Blue', true, 6567114, 0087498, 1, 9, 1013398);
+values (1234567, 'What is my Airline?', 'Jet Blue', true, 6567114, 87498, 1, 9, 1013398);
 
 insert into Questions (id, question, response, isResolved, customer, customerRep, flight, pilot, airline)
 values (8901234, 'When does my Flight take off?', '11:00 AM EST but boarding starts at 10:00 AM EST', true,
@@ -450,7 +450,7 @@ values (2345678, 'Are the pilot and co-pilot best friends', 'of course', true,
 
 insert into Questions (id, question, response, isResolved, customer, customerRep, flight, pilot, airline)
 values (9012345, 'Why are your flights so unpredictable?', null, false,
-        3935181, 0087498, 7, 5, 2118212);
+        3935181, 87498, 7, 5, 2118212);
 
 insert into Questions (id, question, response, isResolved, customer, customerRep, flight, pilot, airline)
 values (6789012, 'What is the chance my flight will be delayed?', 'Your guess is as good as mine',

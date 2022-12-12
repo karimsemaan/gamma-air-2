@@ -51,11 +51,6 @@ def get_seat_types():
 
 # Adds a question to the DB, using the given parameters to fill out the tuple.
 # Once done, redirects back to the home page.
-
-# ROUTE NOT COMPLETE:
-# - how do you generate a unique question ID
-# - how do you fill in the cust ID and cust_rep ID fields of the table?
-
 @customers.route('/submit-question', methods=['POST'])
 def submit_question():
     question_id = get_next_id('Questions')
@@ -71,25 +66,3 @@ def submit_question():
     current_app.logger.info(query)
     execute_query(query, True)
     return 'Success'
-
-
-# REVIEWS #
-
-
-# Displays a form to fill out a review of a flight (using the given flightID).
-# Once submitted, redirects to the '/submit-review?...' route with the appropriate parameters.
-@customers.route('/add-review/<flightID>', methods=['GET'])
-def add_review(flightID):
-    return '<h1>Customers: Add a review of flight #' + flightID + '</h1>'
-
-
-# Adds a review on the given flight ID to the DB, using the given parameters to fill out the tuple.
-# Once done, redirects back to the home page.
-# Parameters:
-# 1) description -> the text of the review being given
-# 2) score -> a number 1..5 (inclusive) scoring the flight overall.
-@customers.route('/submit-question/<flightID>', methods=['GET'])
-def submit_review(flightID):
-    args = request.args  # description, score
-    return '<h1>Customers: Submitting new review</h1>'
-
